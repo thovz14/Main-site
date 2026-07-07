@@ -1,0 +1,857 @@
+/* ========================================
+   WONDERLIGHT STUDIOS — Design System
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* --- CSS Custom Properties --- */
+:root {
+    --bg-primary: #0a0a05;
+    --bg-secondary: #12110a;
+    --bg-card: rgba(255, 255, 255, 0.04);
+    --bg-card-hover: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+
+    --text-primary: #f8f5f0;
+    --text-secondary: #a8a090;
+    --text-muted: rgba(255, 255, 255, 0.35);
+
+    --accent-amber: #f59e0b;
+    --accent-yellow: #fbbf24;
+    --accent-orange: #f97316;
+    --accent-gradient: linear-gradient(135deg, #f59e0b, #fbbf24);
+    --accent-gradient-hover: linear-gradient(135deg, #d97706, #f59e0b);
+    --glow-amber: rgba(245, 158, 11, 0.25);
+    --glow-yellow: rgba(251, 191, 36, 0.25);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+
+    --shadow-card: 0 4px 30px rgba(0, 0, 0, 0.4);
+    --shadow-glow: 0 0 40px rgba(245, 158, 11, 0.1), 0 0 80px rgba(251, 191, 36, 0.05);
+
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle animated background gradient */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse 80% 50% at 20% 20%, rgba(245, 158, 11, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(251, 191, 36, 0.03) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(249, 115, 22, 0.02) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+    animation: bgShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes bgShift {
+    0% { opacity: 0.7; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+/* --- Container --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   NAVIGATION / HEADER
+   ======================================== */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 16px 0;
+    transition: var(--transition-smooth);
+    background: transparent;
+}
+
+header.scrolled {
+    background: rgba(10, 10, 5, 0.88);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 10px 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+}
+
+header h1 span {
+    -webkit-text-fill-color: var(--text-primary);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 8px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 18px;
+    border-radius: var(--radius-xl);
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+nav ul li a:hover {
+    color: var(--text-primary);
+    background: var(--glass-bg);
+}
+
+nav ul li a.active {
+    color: var(--text-primary);
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* Mobile hamburger */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 24px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition-fast);
+}
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+#hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 24px 80px;
+    overflow: hidden;
+}
+
+/* Animated glowing orbs */
+#hero::before {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--glow-amber) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orbFloat1 8s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+#hero::after {
+    content: '';
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, var(--glow-yellow) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: orbFloat2 10s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+
+@keyframes orbFloat1 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(60px, -40px) scale(1.2); }
+}
+
+@keyframes orbFloat2 {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-50px, 30px) scale(1.15); }
+}
+
+#hero .container {
+    max-width: 800px;
+}
+
+#hero h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #ffffff 0%, #fde68a 35%, #f59e0b 60%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: heroTitleIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroTitleIn {
+    0% { opacity: 0; transform: translateY(40px); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+#hero p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    max-width: 550px;
+    margin: 0 auto 40px;
+    animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes heroFadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 36px;
+    background: var(--accent-gradient);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: var(--radius-xl);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 15px var(--glow-amber), 0 0 40px rgba(245, 158, 11, 0.06);
+    animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px var(--glow-amber), 0 0 50px rgba(245, 158, 11, 0.12);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+/* ========================================
+   SECTIONS — General
+   ======================================== */
+section {
+    padding: 100px 0;
+    position: relative;
+    z-index: 1;
+}
+
+section h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+section > .container > p {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin-bottom: 48px;
+}
+
+/* Section divider glow line */
+section + section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(80%, 500px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--glass-border), rgba(245, 158, 11, 0.3), var(--glass-border), transparent);
+}
+
+/* ========================================
+   ABOUT SECTION
+   ======================================== */
+#about {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+#about .container {
+    text-align: center;
+}
+
+#about p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+/* ========================================
+   GAMES / PROJECTS SECTION
+   ======================================== */
+.game-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+    margin-top: 48px;
+}
+
+.game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 0;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: 0;
+    filter: blur(40px);
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--shadow-glow);
+}
+
+.game-card:hover::before {
+    opacity: 0.08;
+}
+
+/* Card image container with gradient background */
+.card-image {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* App logo inside the card */
+.card-logo {
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(245, 158, 11, 0.15);
+    transition: var(--transition-spring);
+    position: relative;
+    z-index: 2;
+}
+
+.game-card:hover .card-logo {
+    transform: scale(1.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.25);
+}
+
+.game-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 20px 24px 8px;
+    position: relative;
+    z-index: 1;
+}
+
+.game-card p {
+    color: var(--text-secondary);
+    font-size: 0.92rem;
+    margin: 0 24px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.game-card a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-yellow);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin: 0 24px 24px;
+    padding: 8px 20px;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.08);
+    transition: var(--transition-fast);
+    position: relative;
+    z-index: 1;
+}
+
+.game-card a:hover {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.5);
+    color: #fbbf24;
+}
+
+/* Card actions — horizontal button layout */
+.card-actions {
+    display: flex;
+    gap: 10px;
+    padding: 0 24px 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.card-actions a {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+}
+
+/* ========================================
+   CONTACT SECTION
+   ======================================== */
+#contact {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--glass-border);
+}
+
+#contact .container {
+    max-width: 650px;
+    text-align: center;
+}
+
+#contact-form {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--accent-amber);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15), 0 0 20px rgba(245, 158, 11, 0.08);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+#contact-form button {
+    width: 100%;
+    padding: 16px;
+    background: var(--accent-gradient);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 20px var(--glow-amber);
+    margin-top: 8px;
+}
+
+#contact-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px var(--glow-amber);
+}
+
+#contact-form button:active {
+    transform: translateY(0);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--glass-border);
+    position: relative;
+    z-index: 1;
+}
+
+footer p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* ========================================
+   SCROLL REVEAL ANIMATIONS
+   ======================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   BUTTON STATES — Loading, Success, Error
+   ======================================== */
+
+/* Loading spinner */
+.spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spinRotate 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+@keyframes spinRotate {
+    to { transform: rotate(360deg); }
+}
+
+#contact-form button.btn-loading {
+    background: linear-gradient(135deg, #d97706, #b45309);
+    cursor: wait;
+    opacity: 0.85;
+}
+
+/* Success state — green with checkmark */
+#contact-form button.btn-success {
+    background: linear-gradient(135deg, #059669, #10b981) !important;
+    box-shadow: 0 4px 25px rgba(16, 185, 129, 0.4) !important;
+    animation: successPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.checkmark {
+    display: inline-block;
+    font-size: 1.15em;
+    font-weight: 700;
+    animation: checkPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    margin-right: 4px;
+}
+
+@keyframes successPop {
+    0% { transform: scale(0.95); }
+    50% { transform: scale(1.04); }
+    100% { transform: scale(1); }
+}
+
+@keyframes checkPop {
+    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+    60% { transform: scale(1.3) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+/* Error state */
+#contact-form button.btn-error {
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+    box-shadow: 0 4px 25px rgba(239, 68, 68, 0.35) !important;
+    animation: errorShake 0.5s ease;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    15% { transform: translateX(-6px); }
+    30% { transform: translateX(6px); }
+    45% { transform: translateX(-4px); }
+    60% { transform: translateX(4px); }
+    75% { transform: translateX(-2px); }
+    90% { transform: translateX(2px); }
+}
+
+/* ========================================
+   NAV LINK ANIMATED UNDERLINE
+   ======================================== */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 2px;
+    background: var(--accent-gradient);
+    border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+nav ul li a:hover::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+nav ul li a.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* ========================================
+   HAMBURGER ACTIVE ANIMATION
+   ======================================== */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ========================================
+   CARD LOGO FLOAT ANIMATION
+   ======================================== */
+.card-logo {
+    animation: logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.game-card:hover .card-logo {
+    animation: none;
+    transform: scale(1.08);
+}
+
+/* ========================================
+   CARD GRADIENT SHIMMER
+   ======================================== */
+.card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent);
+    transform: skewX(-20deg);
+    animation: cardShimmer 5s ease-in-out infinite;
+}
+
+@keyframes cardShimmer {
+    0%, 100% { left: -150%; }
+    50% { left: 150%; }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(12, 12, 30, 0.98);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        padding: 100px 32px 32px;
+        transition: var(--transition-smooth);
+        border-left: 1px solid var(--glass-border);
+        z-index: 999;
+    }
+
+    nav.open {
+        right: 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 14px 20px;
+        font-size: 1rem;
+        border-radius: var(--radius-md);
+    }
+
+    .game-list {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 70px 0;
+    }
+
+    #hero {
+        padding: 100px 24px 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    #hero h2 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 0 16px;
+    }
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(245, 158, 11, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(245, 158, 11, 0.5);
+}
+
+/* ========================================
+   SELECTION STYLE
+   ======================================== */
+::selection {
+    background: rgba(245, 158, 11, 0.3);
+    color: #ffffff;
+}
