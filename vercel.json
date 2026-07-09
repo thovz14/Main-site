@@ -3,6 +3,7 @@
   "outputDirectory": ".",
   "framework": null,
   "rewrites": [
+    { "source": "/social-media", "destination": "/social-media.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

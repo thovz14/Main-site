@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Wonderlight Studios — Our TikTok, YouTube and social media content. Watch our latest videos and discover our creative work.">
+    <title>Social Media — Wonderlight Studios</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/social-media.css">
+    <link rel="icon" type="image/png" href="/Media/icon-512x512(1).png">
+</head>
+
+<body>
+
+    <!-- ===== HEADER / NAVIGATION ===== -->
+    <header id="main-header" class="scrolled">
+        <div class="container">
+            <h1><a href="/" style="text-decoration:none;-webkit-text-fill-color:inherit;">✨ Wonderlight Studio's</a>
+            </h1>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#games">Projects</a></li>
+                    <li><a href="/social-media.html" class="active">Social Media</a></li>
+                    <li><a href="https://accounts.wonderdev.nl" target="_blank">Account</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section id="social-hero">
+        <div class="container">
+            <h2>Social Media</h2>
+            <p>Bekijk onze TikTok's, YouTube video's en meer. Klik op een video voor details.</p>
+
+            <!-- Filter tabs -->
+            <div class="filter-tabs" id="filter-tabs">
+                <button class="filter-tab active" data-filter="all">Alles</button>
+                <button class="filter-tab" data-filter="tiktok">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.87a8.16 8.16 0 004.76 1.52v-3.4a4.85 4.85 0 01-1-.3z" />
+                    </svg>
+                    TikTok
+                </button>
+                <button class="filter-tab" data-filter="youtube">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.54 3.5 12 3.5 12 3.5s-7.54 0-9.38.55A3.02 3.02 0 00.5 6.19 31.7 31.7 0 000 12a31.7 31.7 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.84.55 9.38.55 9.38.55s7.54 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.7 31.7 0 0024 12a31.7 31.7 0 00-.5-5.81zM9.54 15.57V8.43L15.82 12l-6.28 3.57z" />
+                    </svg>
+                    YouTube
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VIDEO GRID ===== -->
+    <section id="social-grid">
+        <div class="container">
+            <div class="video-grid" id="video-grid">
+                <!-- Video cards worden hier automatisch geladen vanuit de VIDEOS lijst hieronder -->
+            </div>
+
+            <!-- Lege state -->
+            <div class="empty-state" id="empty-state" style="display:none;">
+                <div class="empty-icon">📱</div>
+                <h3>Nog geen video's</h3>
+                <p>kom later terug om te kijken naar onze nieuwste video's!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VIDEO DETAIL POPUP ===== -->
+    <div class="modal-overlay" id="detail-modal">
+        <div class="modal-card modal-detail">
+            <div class="modal-header">
+                <h3 id="detail-title">Video titel</h3>
+                <button class="modal-close" id="detail-modal-close">&times;</button>
+            </div>
+            <div class="detail-body">
+                <div class="detail-thumbnail" id="detail-thumbnail">
+                    <img src="" alt="Video thumbnail" id="detail-img">
+                </div>
+                <div class="detail-info">
+                    <div class="detail-row">
+                        <span class="detail-label">Platform</span>
+                        <span class="detail-badge" id="detail-platform">TikTok</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Link</span>
+                        <a href="#" id="detail-link" target="_blank" class="detail-link-value">Bekijk video →</a>
+                    </div>
+                </div>
+                <!-- HTML Code Block -->
+                <div class="detail-code-section" id="detail-html-section" style="display:none;">
+                    <div class="code-section-header">
+                        <span class="code-lang-badge html">&lt;/&gt; HTML</span>
+                        <button class="copy-btn" data-copy="detail-html-code" title="Kopiëren">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" />
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                            </svg>
+                            <span class="copy-label">Kopiëren</span>
+                        </button>
+                    </div>
+                    <div class="detail-code-block">
+                        <pre><code id="detail-html-code"></code></pre>
+                    </div>
+                </div>
+
+                <!-- CSS Code Block -->
+                <div class="detail-code-section" id="detail-css-section" style="display:none;">
+                    <div class="code-section-header">
+                        <span class="code-lang-badge css">{ } CSS</span>
+                        <button class="copy-btn" data-copy="detail-css-code" title="Kopiëren">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" />
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                            </svg>
+                            <span class="copy-label">Kopiëren</span>
+                        </button>
+                    </div>
+                    <div class="detail-code-block">
+                        <pre><code id="detail-css-code"></code></pre>
+                    </div>
+                </div>
+
+                <!-- JS Code Block -->
+                <div class="detail-code-section" id="detail-js-section" style="display:none;">
+                    <div class="code-section-header">
+                        <span class="code-lang-badge js">⚡ JS</span>
+                        <button class="copy-btn" data-copy="detail-js-code" title="Kopiëren">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" />
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                            </svg>
+                            <span class="copy-label">Kopiëren</span>
+                        </button>
+                    </div>
+                    <div class="detail-code-block">
+                        <pre><code id="detail-js-code"></code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Wonderlight Studios. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!--
+    ╔═══════════════════════════════════════════════════╗
+    ║  📋 HOE VOEG JE VIDEO'S TOE?                      ║
+    ╠═══════════════════════════════════════════════════╣
+    ║                                                   ║
+    ║  1. Zet je thumbnail/omslag foto in de            ║
+    ║     /Media/ map (bijv. Media/tiktok-1.jpg)        ║
+    ║                                                   ║
+    ║  2. Kopieer het lege blok hieronder               ║
+    ║                                                   ║
+    ║  3. Vul de velden in:                             ║
+    ║     • title     = titel van je video              ║
+    ║     • platform  = "tiktok" of "youtube"           ║
+    ║     • link      = link naar de video              ║
+    ║     • thumbnail = pad naar je foto                ║
+    ║     • html      = HTML code (mag leeg "")         ║
+    ║     • css       = CSS code (mag leeg "")          ║
+    ║     • js        = JS code (mag leeg "")           ║
+    ║                                                   ║
+    ║  ⚡ Niet ingevulde vakken worden niet getoond!     ║
+    ║                                                   ║
+    ╚═══════════════════════════════════════════════════╝
+    -->
+
+    <script>
+        const VIDEOS = [
+            {
+                title: "Modern Navbar | HTML CSS",
+                platform: "tiktok",
+                link: "https://www.tiktok.com/@wonderdev.nl/video/7660562920828308769?is_from_webapp=1&sender_device=pc&web_id=7660133531197130273",
+                thumbnail: "/Media/TiktokVid1.png",
+                html: `<!DOCTYPE html>
+<html>
+<head>
+    <title>Navbar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="#">Home</a>
+  <a href="#">Projects</a>
+  <a href="#">Services</a>
+  <a href="#">Contact</a>
+</nav>
+
+</body>
+</html>`,
+                css: `body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #030712;
+  font-family: system-ui, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 8px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.navbar a {
+  color: #94a3b8;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 18px;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 1px solid transparent;
+}
+
+.navbar a:hover {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(139, 92, 246, 0.15));
+  border: 1px solid rgba(6, 182, 212, 0.5);
+  transform: translateY(-6px) scale(1.08);
+  box-shadow: 0 12px 24px -6px rgba(6, 182, 212, 0.3);
+}
+
+.navbar a:active {
+  transform: translateY(2px) scale(0.95);
+  background: #06b6d4;
+  color: #000;
+  box-shadow: 0 0 40px #06b6d4, 0 0 80px #8b5cf6;
+  border-color: transparent;
+  transition: all 0.1s ease;
+}
+
+.navbar:has(a:hover) a:not(:hover) {
+  opacity: 0.25;
+  filter: blur(2px);
+  transform: scale(0.92);
+}`,
+                js: ""
+            },
+
+            // =============================================
+            //  👇 KOPIEER DIT BLOK VOOR ELKE NIEUWE VIDEO:
+            //
+            //  {
+            //      title:     "Titel van je video",
+            //      platform:  "tiktok",
+            //      link:      "https://...",
+            //      thumbnail: "/Media/jouw-foto.jpg",
+            //      html:      `plak hier je HTML`,
+            //      css:       `plak hier je CSS`,
+            //      js:        ""
+            //  },
+            //
+            // =============================================
+        ];
+    </script>
+
+    <script src="/social-media.js"></script>
+</body>
+
+</html>
