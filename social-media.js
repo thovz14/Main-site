@@ -122,9 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Link
         const linkEl = document.getElementById('detail-link');
         linkEl.href = video.link;
-        linkEl.textContent = 'Bekijk video →';
+        linkEl.textContent = 'Watch video →';
 
-        // Code blocks — toon alleen als er code is ingevuld
+        // Code blocks — only show if code is provided
         const codeFields = [
             { key: 'html', sectionId: 'detail-html-section', codeId: 'detail-html-code' },
             { key: 'css',  sectionId: 'detail-css-section',  codeId: 'detail-css-code' },
@@ -157,10 +157,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             navigator.clipboard.writeText(code).then(() => {
                 btn.classList.add('copied');
-                if (label) label.textContent = 'Gekopieerd!';
+                if (label) label.textContent = 'Copied!';
                 setTimeout(() => {
                     btn.classList.remove('copied');
-                    if (label) label.textContent = 'Kopiëren';
+                    if (label) label.textContent = 'Copy';
                 }, 2000);
             });
         });
