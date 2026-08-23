@@ -373,6 +373,198 @@ section + section::before {
 }
 
 /* ========================================
+   FOCUS & TECH STACK SECTION
+   ======================================== */
+#focus {
+    padding: 80px 0;
+}
+
+/* --- Shared card base --- */
+.focus-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: 28px 32px;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.focus-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-lg);
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: 0;
+    filter: blur(50px);
+}
+
+.focus-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--glass-border-hover);
+    box-shadow: var(--shadow-glow);
+}
+
+.focus-card:hover::before {
+    opacity: 0.08;
+}
+
+/* --- Main two-column layout: left stacked, right tech stack --- */
+.focus-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.focus-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.focus-left .focus-card {
+    flex: 1;
+}
+
+/* --- Card header (emoji + title) --- */
+.focus-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.focus-emoji {
+    font-size: 1.6rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.5));
+}
+
+.focus-card-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* --- Body text in left cards --- */
+.focus-body {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.75;
+    position: relative;
+    z-index: 1;
+    margin: 0;
+}
+
+.focus-body strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* --- Right: tech stack card --- */
+.focus-stack-card {
+    padding: 28px 32px 32px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+/* Vertical list of sub-category sections */
+.stack-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+    margin-top: 4px;
+}
+
+/* Each sub-category box */
+.stack-subcategory {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+    transition: var(--transition-fast);
+}
+
+.stack-subcategory:hover {
+    background: rgba(255, 255, 255, 0.055);
+    border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* Category label with amber underline */
+.stack-cat-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-amber);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* Horizontal row of tech items */
+.stack-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+}
+
+.stack-item-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: var(--transition-fast);
+}
+
+.stack-item-list li:hover {
+    color: var(--text-primary);
+}
+
+/* Devicon icon sizing — shared wrapper */
+.stack-devicon {
+    font-size: 1.5rem;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+/* Inline SVG (Discord) needs explicit dimensions */
+.stack-devicon-svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Icon hover lift */
+.stack-item-list li:hover .stack-devicon {
+    transform: scale(1.15) translateY(-1px);
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+/* ========================================
    GAMES / PROJECTS SECTION
    ======================================== */
 .game-list {
