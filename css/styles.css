@@ -315,6 +315,40 @@ nav ul li a.active {
     transform: translateY(-1px) scale(0.98);
 }
 
+/* Ghost / outline variant — GitHub branded */
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+/* Override animation on individual buttons inside the row */
+.hero-buttons .cta-button {
+    animation: none;
+}
+
+.cta-button-ghost {
+    background: #24292f;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.cta-button-ghost::before {
+    display: none;
+}
+
+.cta-button-ghost:hover {
+    background: #2d333b;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px) scale(1.02);
+}
+
 /* ========================================
    SECTIONS — General
    ======================================== */
@@ -692,6 +726,42 @@ section + section::before {
     margin: 0;
 }
 
+/* Banner image variant (wide art, not square logo) */
+.card-image-banner {
+    overflow: hidden;
+    padding: 0;
+}
+
+.card-banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: var(--transition-smooth);
+}
+
+.game-card:hover .card-banner-img {
+    transform: scale(1.05);
+}
+
+/* Client Project badge */
+.card-badge {
+    display: inline-block;
+    margin: 16px 24px -4px;
+    padding: 3px 12px;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: var(--radius-xl);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-amber);
+    position: relative;
+    z-index: 1;
+}
+
 /* ========================================
    CONTACT SECTION
    ======================================== */
@@ -962,6 +1032,10 @@ nav ul li a.active::after {
    RESPONSIVE
    ======================================== */
 @media (max-width: 768px) {
+    .focus-layout {
+        grid-template-columns: 1fr;
+    }
+
     .hamburger {
         display: flex;
     }
