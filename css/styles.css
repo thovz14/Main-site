@@ -583,7 +583,7 @@ section + section::before {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition-fast);
+    transition: 0.1s ease-out;
 }
 
 /* Inline SVG (Discord) needs explicit dimensions */
@@ -660,7 +660,7 @@ section + section::before {
     object-fit: cover;
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(245, 158, 11, 0.15);
-    transition: var(--transition-spring);
+    transition: 0.1s ease-out;
     position: relative;
     z-index: 2;
 }
@@ -738,7 +738,7 @@ section + section::before {
     object-fit: cover;
     object-position: center;
     display: block;
-    transition: var(--transition-smooth);
+    transition: 0.1s ease-out;
 }
 
 .game-card:hover .card-banner-img {

@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // =============================================
     // 7. TILT EFFECT ON CARDS
     // =============================================
-    document.querySelectorAll('.game-card').forEach(card => {
+    document.querySelectorAll('.game-card, .focus-card').forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -252,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            card.style.transform = '';
         });
     });
 
