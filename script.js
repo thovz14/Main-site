@@ -130,6 +130,14 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    
+                    // Clean up classes and styles after animation finishes so hover/tilt works
+                    setTimeout(() => {
+                        entry.target.classList.remove('reveal', 'visible');
+                        entry.target.style.transitionDelay = '';
+                    }, 2000);
+                    
+                    observer.unobserve(entry.target);
                 }
             });
         }, {
