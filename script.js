@@ -239,6 +239,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. TILT EFFECT ON CARDS
     // =============================================
     document.querySelectorAll('.game-card, .focus-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.setProperty('--hover-transition', '0.1s');
+        });
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -252,6 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         card.addEventListener('mouseleave', () => {
+            card.style.setProperty('--hover-transition', 'var(--transition-smooth)');
             card.style.transform = '';
         });
     });
@@ -278,6 +283,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 9. MAGNETIC BUTTON EFFECT ON CTA
     // =============================================
     document.querySelectorAll('.cta-button').forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            btn.style.setProperty('--hover-transition', '0.1s');
+        });
+
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
@@ -286,6 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         btn.addEventListener('mouseleave', () => {
+            btn.style.setProperty('--hover-transition', 'var(--transition-smooth)');
             btn.style.transform = '';
         });
     });
