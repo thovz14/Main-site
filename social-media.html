@@ -1123,6 +1123,384 @@ body {
 `,
                 js: ""
             },
+            {
+                title: "Hover Button Effects Part 2",
+                platform: "tiktok",
+                link: "https://www.tiktok.com/@wonderdev.nl/video/7678258332443954465",
+                thumbnail: "/Media/thumbnails/Button effects part 2.png",
+                html: `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Button Effects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="buttons-grid">
+            <!-- 6. Liquid Fill -->
+            <div class="row">
+                <div class="code-block">
+                    <pre><code><span class="selector">.fx-liquid:hover::before</span> {
+  <span class="property">top</span>: <span class="value">-50%</span>;
+}</code></pre>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn fx-liquid">LIQUID FILL</button>
+                </div>
+            </div>
+
+            <!-- 7. Cyber Slice -->
+            <div class="row">
+                <div class="code-block">
+                    <pre><code><span class="selector">.fx-slice:hover::before</span> {
+  <span class="property">transform</span>: <span class="value">skewX(-45deg) translateX(150%)</span>;
+}</code></pre>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn fx-slice">CYBER SLICE</button>
+                </div>
+            </div>
+
+            <!-- 8. Plasma Glow -->
+            <div class="row">
+                <div class="code-block">
+                    <pre><code><span class="selector">.fx-plasma:hover</span> {
+  <span class="property">background-position</span>: <span class="value">100% center</span>;
+}</code></pre>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn fx-plasma">PLASMA GLOW</button>
+                </div>
+            </div>
+
+            <!-- 9. Jelly Bounce -->
+            <div class="row">
+                <div class="code-block">
+                    <pre><code><span class="selector">.fx-jelly:hover</span> {
+  <span class="property">animation</span>: <span class="value">jelly</span>;
+}</code></pre>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn fx-jelly">JELLY BOUNCE</button>
+                </div>
+            </div>
+
+            <!-- 10. Spotlight Fill -->
+            <div class="row">
+                <div class="code-block">
+                    <pre><code><span class="selector">.fx-spotlight:hover::before</span> {
+  <span class="property">clip-path</span>: <span class="value">circle(150% at 50% 50%)</span>;
+}</code></pre>
+                </div>
+                <div class="button-wrapper">
+                    <button class="btn fx-spotlight">SPOTLIGHT FILL</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>`,
+                css: `@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@800&family=Pacifico&display=swap');
+
+:root {
+    --bg-dark: #090a10;
+    --code-bg: #15161e;
+    --text-white: #ffffff;
+
+    --color-teal: #4fd1c5;
+    --color-blue: #63b3ed;
+    --color-yellow: #f6ad55;
+
+    --glitch-bg: #00ff41;
+    --neon-pink: #ff003c;
+
+    --push-grad-1: #ffaa00;
+    --push-grad-2: #ff5500;
+    --push-shadow: #cc4400;
+
+    --activate-grad-1: #8a2be2;
+    --activate-grad-2: #4b0082;
+    --activate-grad-3: #2d004d;
+
+    --rings-grad-1: #00bfff;
+    --rings-grad-2: #1e90ff;
+
+    --liquid-border: #ff1493;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+    min-height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.row {
+    display: flex;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.code-block {
+    flex: 1.3;
+    background-color: var(--code-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.code-block pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: #a9b1d6;
+    margin: 0;
+}
+
+.code-block .selector {
+    color: var(--color-teal);
+}
+
+.code-block .property {
+    color: var(--color-blue);
+}
+
+.code-block .value {
+    color: var(--color-yellow);
+}
+
+.button-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.perspective-wrapper {
+    perspective: 1000px;
+}
+
+.btn {
+    width: 100%;
+    height: 100%;
+    min-height: 60px;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    outline: none;
+}
+
+/* 6. Liquid Fill */
+.fx-liquid {
+    background: transparent;
+    color: var(--liquid-border);
+    border: 2px solid var(--liquid-border);
+    overflow: hidden;
+    z-index: 1;
+}
+
+.fx-liquid::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: var(--liquid-border);
+    transform: translateX(-50%);
+    border-radius: 40%;
+    z-index: -1;
+    transition: top 0.5s;
+    animation: liquid-wave 4s linear infinite;
+}
+
+.fx-liquid:hover {
+    color: #000;
+}
+
+.fx-liquid:hover::before {
+    top: -50%;
+}
+
+@keyframes liquid-wave {
+    0% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
+
+/* 7. Cyber Slice */
+.fx-slice {
+    background: transparent;
+    color: #ffff00;
+    border: 2px solid #ffff00;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.fx-slice::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #ffff00;
+    transform: skewX(-45deg);
+    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+    z-index: -1;
+}
+
+.fx-slice:hover {
+    color: #000;
+}
+
+.fx-slice:hover::before {
+    transform: skewX(-45deg) translateX(150%);
+}
+
+/* 8. Plasma Glow */
+.fx-plasma {
+    background: linear-gradient(90deg, #ff007f, #ff7f00, #ffff00, #00ff00, #0000ff, #8b00ff, #ff007f);
+    background-size: 300% 100%;
+    color: #fff;
+    border: none;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+    transition: all 0.3s ease;
+}
+
+.fx-plasma:hover {
+    background-position: 100% center;
+    box-shadow: 0 0 25px rgba(255, 255, 0, 0.7);
+}
+
+/* 9. Jelly Bounce */
+.fx-jelly {
+    background: #ff3366;
+    color: #fff;
+    box-shadow: 0 10px 20px -10px rgba(255, 51, 102, 0.7);
+}
+
+.fx-jelly:hover {
+    animation: jelly 0.6s ease;
+}
+
+@keyframes jelly {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    30% {
+        transform: scale(1.15, 0.85);
+    }
+
+    40% {
+        transform: scale(0.85, 1.15);
+    }
+
+    50% {
+        transform: scale(1.05, 0.95);
+    }
+
+    65% {
+        transform: scale(0.98, 1.02);
+    }
+
+    75% {
+        transform: scale(1.02, 0.98);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+/* 10. Spotlight Fill */
+.fx-spotlight {
+    background: #1a1a2e;
+    color: #00e5ff;
+    border: 2px solid #00e5ff;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.fx-spotlight::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: #00e5ff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    clip-path: circle(0% at 50% 50%);
+    transition: clip-path 0.4s ease-out;
+    z-index: -1;
+}
+
+.fx-spotlight:hover {
+    color: #000;
+}
+
+.fx-spotlight:hover::before {
+    clip-path: circle(150% at 50% 50%);
+}
+`,
+                js: ""
+            },
 
             // =============================================
             //  👇 COPY THIS BLOCK FOR EACH NEW VIDEO:
