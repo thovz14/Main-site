@@ -18,13 +18,13 @@
     --text-secondary: #a8a090;
     --text-muted: rgba(255, 255, 255, 0.35);
 
-    --accent-amber: #f59e0b;
-    --accent-yellow: #fbbf24;
-    --accent-orange: #f97316;
-    --accent-gradient: linear-gradient(135deg, #f59e0b, #fbbf24);
-    --accent-gradient-hover: linear-gradient(135deg, #d97706, #f59e0b);
-    --glow-amber: rgba(245, 158, 11, 0.25);
-    --glow-yellow: rgba(251, 191, 36, 0.25);
+    --accent-amber: #10b981;
+    --accent-yellow: #34d399;
+    --accent-orange: #059669;
+    --accent-gradient: linear-gradient(135deg, #10b981, #34d399);
+    --accent-gradient-hover: linear-gradient(135deg, #059669, #10b981);
+    --glow-amber: rgba(16, 185, 129, 0.25);
+    --glow-yellow: rgba(52, 211, 153, 0.25);
 
     --radius-sm: 8px;
     --radius-md: 12px;
