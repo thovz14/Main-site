@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.growing = Math.random() > 0.5;
                 // Random color: purple, cyan, or white
                 const colors = [
-                    'rgba(245, 158, 11,',    // amber
-                    'rgba(251, 191, 36,',    // yellow
-                    'rgba(249, 115, 22,',    // orange
+                    'rgba(16, 185, 129,',    // emerald
+                    'rgba(52, 211, 153,',    // light green
+                    'rgba(5, 150, 105,',     // dark green
                     'rgba(255, 255, 255,',   // white
                 ];
                 this.color = colors[Math.floor(Math.random() * colors.length)];
@@ -406,5 +406,168 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+    // =============================================
+    // 13. CUSTOM WIDGETS (LocalStorage)
+    // =============================================
+    const widgetsContainer = document.getElementById('custom-widgets-container');
+    const addWidgetBtn = document.getElementById('add-widget-btn');
+
+    if (widgetsContainer && addWidgetBtn) {
+        let widgets = JSON.parse(localStorage.getItem('wonderlight_widgets')) || [];
+
+        function saveWidgets() {
+            try {
+                localStorage.setItem('wonderlight_widgets', JSON.stringify(widgets));
+            } catch (e) {
+                if (e.name === 'QuotaExceededError') {
+                    alert('Niet genoeg opslagruimte voor deze foto. Probeer een kleinere foto!');
+                }
+            }
+        }
+
+        function renderWidgets() {
+            widgetsContainer.innerHTML = '';
+            widgets.forEach((widget, index) => {
+                const card = document.createElement('div');
+                card.className = 'custom-widget-card';
+                card.style.backgroundColor = widget.bgColor || 'rgba(255, 255, 255, 0.04)';
+                card.style.color = widget.textColor || '#f8f5f0';
+                card.style.boxShadow = '0 4px 30px rgba(0,0,0,0.4), 0 0 ' + (widget.glowStrength || 40) + 'px ' + (widget.glowColor || 'rgba(16, 185, 129, 0.1)');
+
+                card.innerHTML = `
+                    <div class="widget-layout">
+                        <div class="widget-text">
+                            <h3 class="widget-title" contenteditable="true" data-index="${index}">${widget.title || 'Nieuwe Widget'}</h3>
+                            <p class="widget-desc" contenteditable="true" data-index="${index}">${widget.description || 'Beschrijving hier...'}</p>
+                        </div>
+                        <label class="widget-image-container">
+                            ${widget.image ? `<img src="${widget.image}" alt="Widget Image">` : `<span>Upload Foto</span>`}
+                            <input type="file" accept="image/*" class="widget-img-upload" data-index="${index}" style="display: none;">
+                        </label>
+                    </div>
+                    <div class="widget-settings">
+                        <label title="Achtergrondkleur">
+                            BG <input type="color" class="setting-bg" data-index="${index}" value="${rgbaToHex(widget.bgColor) || '#1c1c1c'}">
+                        </label>
+                        <label title="Tekstkleur">
+                            Txt <input type="color" class="setting-text" data-index="${index}" value="${widget.textColor || '#f8f5f0'}">
+                        </label>
+                        <label title="Gloedkleur">
+                            Glow <input type="color" class="setting-glow" data-index="${index}" value="${rgbaToHex(widget.glowColor) || '#10b981'}">
+                        </label>
+                        <label title="Gloedsterkte">
+                            <input type="range" class="setting-glow-strength" data-index="${index}" min="0" max="100" value="${widget.glowStrength || 40}">
+                        </label>
+                        <button class="remove-widget-btn" data-index="${index}">Verwijder</button>
+                    </div>
+                `;
+                widgetsContainer.appendChild(card);
+            });
+            attachWidgetEvents();
+        }
+
+        function rgbaToHex(color) {
+            if (!color) return null;
+            if (color.startsWith('#')) return color;
+            const rgb = color.match(/\\d+/g);
+            if (!rgb || rgb.length < 3) return '#10b981';
+            return '#' + rgb.slice(0, 3).map(x => parseInt(x).toString(16).padStart(2, '0')).join('');
+        }
+        
+        function hexToRgba(hex, alpha) {
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+        }
+
+        function attachWidgetEvents() {
+            document.querySelectorAll('.widget-title, .widget-desc').forEach(el => {
+                el.addEventListener('blur', (e) => {
+                    const idx = e.target.getAttribute('data-index');
+                    if (e.target.classList.contains('widget-title')) widgets[idx].title = e.target.innerText;
+                    if (e.target.classList.contains('widget-desc')) widgets[idx].description = e.target.innerText;
+                    saveWidgets();
+                });
+            });
+
+            document.querySelectorAll('.setting-bg').forEach(el => {
+                el.addEventListener('input', (e) => {
+                    const idx = e.target.getAttribute('data-index');
+                    widgets[idx].bgColor = hexToRgba(e.target.value, 0.4);
+                    saveWidgets();
+                    renderWidgets();
+                });
+            });
+
+            document.querySelectorAll('.setting-text').forEach(el => {
+                el.addEventListener('input', (e) => {
+                    const idx = e.target.getAttribute('data-index');
+                    widgets[idx].textColor = e.target.value;
+                    saveWidgets();
+                    renderWidgets();
+                });
+            });
+
+            document.querySelectorAll('.setting-glow').forEach(el => {
+                el.addEventListener('input', (e) => {
+                    const idx = e.target.getAttribute('data-index');
+                    widgets[idx].glowColor = hexToRgba(e.target.value, 0.2);
+                    saveWidgets();
+                    renderWidgets();
+                });
+            });
+            
+            document.querySelectorAll('.setting-glow-strength').forEach(el => {
+                el.addEventListener('input', (e) => {
+                    const idx = e.target.getAttribute('data-index');
+                    widgets[idx].glowStrength = e.target.value;
+                    saveWidgets();
+                    renderWidgets();
+                });
+            });
+
+            document.querySelectorAll('.widget-img-upload').forEach(el => {
+                el.addEventListener('change', (e) => {
+                    const idx = e.target.getAttribute('data-index');
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => {
+                            widgets[idx].image = ev.target.result;
+                            saveWidgets();
+                            renderWidgets();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.remove-widget-btn').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    const idx = e.target.getAttribute('data-index');
+                    widgets.splice(idx, 1);
+                    saveWidgets();
+                    renderWidgets();
+                });
+            });
+        }
+
+        addWidgetBtn.addEventListener('click', () => {
+            widgets.push({
+                title: 'Nieuwe Widget',
+                description: 'Beschrijving hier...',
+                image: null,
+                bgColor: 'rgba(255, 255, 255, 0.04)',
+                textColor: '#f8f5f0',
+                glowColor: 'rgba(16, 185, 129, 0.1)',
+                glowStrength: 40
+            });
+            saveWidgets();
+            renderWidgets();
+        });
+
+        renderWidgets();
+    }
 
 });
